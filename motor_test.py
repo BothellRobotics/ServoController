@@ -6,7 +6,7 @@ from __future__ import division
 import time
 
 # Import the PCA9685 module.
-import pca9685_robot
+from pca9685_robot import pca9685_robot
 
 
 # Uncomment to enable debug output.
