@@ -38,13 +38,13 @@ def software_reset(i2c=None, **kwargs):
 class pca9685_robot(object):
     """PCA9685 PWM LED/servo controller."""
 
-    def __init__(self, address=PCA9685_ADDRESS, i2c = None, **kwargs):
+    def __init__(self, address=PCA9685_ADDRESS, i2c=None, **kwargs):
         """Initialize the PCA9685"""
         # Setup I2C interface for the device
+        print('Initialize the PCA9685')
         if i2c is None:
             import Adafruit_GPIO.I2C as I2C
             i2c = I2C
-
         self._device = i2c.get_i2c_device(address, **kwargs)
         self.set_all_pwm(0,0)
         self._device.write8(MODE2, OUTDRV)
@@ -75,6 +75,7 @@ class pca9685_robot(object):
 
     def set_pwm(self, channel, on, off):
         """Sets a single PWM channel."""
+        print('attempting to set single pwm channel')
         self._device.write8(LED0_ON_L+4*channel, on & 0xFF)
         self._device.write8(LED0_ON_H+4*channel, on >> 8)
 
@@ -88,6 +89,17 @@ class pca9685_robot(object):
 
         self._device.write8(LED0_OFF_L, on & 0xFF)
         self._device.write8(LED0_OFF_H,off >> 8)
+
+    # Helper function to make setting a servo pulse width simpler.
+    def set_servo_pulse(self, channel, pulse):
+        pulse_length = 1000000    # 1,000,000 us per second
+        pulse_length //= 60       # 60 Hz
+        print('{0}us per period'.format(pulse_length))
+        pulse_length //= 4096     # 12 bits of resolution
+        print('{0}us per bit'.format(pulse_length))
+        pulse *= 1000
+        pulse //= pulse_length
+        pwm.set_pwm(channel, 0, pulse)
 
 
 
