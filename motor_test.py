@@ -6,7 +6,7 @@ from __future__ import division
 import time
 
 # Import the PCA9685 module.
-import Adafruit_PCA9685
+import pca9685_robot
 
 
 # Uncomment to enable debug output.
@@ -14,7 +14,7 @@ import Adafruit_PCA9685
 #logging.basicConfig(level=logging.DEBUG)
 
 # Initialise the PCA9685 using the default address (0x40).
-pwm = Adafruit_PCA9685.PCA9685()
+pwm = pca9685_robot()
 
 # Alternatively specify a different address and/or bus:
 #pwm = Adafruit_PCA9685.PCA9685(address=0x41, busnum=2)
