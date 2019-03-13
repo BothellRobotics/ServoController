@@ -47,8 +47,8 @@ class pca9685_robot(object):
 
         self._device = i2c.get_i2c_device(address, **kwargs)
         self.set_all_pwm(0,0)
-        self._device.write(MODE2, OUTDRV)
-        self._device.write(MODE1, ALLCALL)
+        self._device.write8(MODE2, OUTDRV)
+        self._device.write8(MODE1, ALLCALL)
         time.sleep(0.005)
         mode1 = self._device.readU8(MODE1)
         mode1 = mode1 & ~SLEEP
