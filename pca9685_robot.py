@@ -45,6 +45,7 @@ class pca9685_robot(object):
         if i2c is None:
             import Adafruit_GPIO.I2C as I2C
             i2c = I2C
+            print('Initialized i2c GPIO')
         self._device = i2c.get_i2c_device(address, **kwargs)
         self.set_all_pwm(0,0)
         self._device.write8(MODE2, OUTDRV)
