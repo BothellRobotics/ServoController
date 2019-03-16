@@ -45,6 +45,14 @@ class PCA9685ROBOT(object):
         """Initialize the PCA9685"""
         # Setup I2C interface for the device
         print('Initialize the PCA9685')
+        self._minimum_count = 0
+        self._maximum_count = 4095
+        self._minimum_frequency = 0
+        self._maximum_frequency = 1000
+        self._frequency
+        self._ready
+        self._address
+
         if i2c is None:
             import Adafruit_GPIO.I2C as I2C
             i2c = I2C
@@ -58,6 +66,53 @@ class PCA9685ROBOT(object):
         mode1 = mode1 & ~SLEEP
         self._device.write8(MODE1, mode1)
         time.sleep(0.005)
+
+    @property
+    def ready(self):
+        return self._ready
+
+    @property
+    def address(self):
+        return self._address
+
+    @property
+    def minimum_frequency(self):
+        return self._minimum_frequency
+
+    @property
+    def maximum_frequency(self):
+        return self._maximum_frequency
+    
+    @property
+    def minimum_count(self):
+        return self._minimum_count
+
+    @property
+    def minimum_count(self, value):
+        return self._minimum_count = value
+
+    @property
+    def maximum_count(self):
+        return self._maximum_count
+
+    @property
+    def maximum_count(self, value):
+        return self._maximum_count = value
+
+    @property
+    def frequency(self, value):
+        if(value < minimum_frequency):
+            self._frequency = _minimum_frequency
+        elif (value > maximum_frequency):
+            self._frequency = _maximum_frequency
+        else:            
+            self._frequency = value
+
+    @property
+    def frequency(self):
+        return self._frequency
+
+    
 
     def set_pwm_freq(self, freq_hz):
         """Set the PWM frequency to the provided value in hertz"""
@@ -77,21 +132,42 @@ class PCA9685ROBOT(object):
         time.sleep(0.005)
         self._device.write8(MODE1, oldmode | 0x80)
 
-    def set_pwm(self, channel, on, off):
+    def set_pwm(self, channel, on_count, off_count):
         """Sets a single PWM channel."""
         print('attempting to set single pwm channel')
-        self._device.write8(LED0_ON_L+4*channel, on & 0xFF)
-        self._device.write8(LED0_ON_H+4*channel, on >> 8)
-        self._device.write8(LED0_OFF_L+4*channel, on & 0xFF)
-        self._device.write8(LED0_OFF_H+4*channel,off >> 8)
+        self._device.write8(LED0_ON_L+4*channel, on_count & 0xFF)
+        self._device.write8(LED0_ON_H+4*channel, on_count >> 8)
+        self._device.write8(LED0_OFF_L+4*channel, on_count & 0xFF)
+        self._device.write8(LED0_OFF_H+4*channel, off_count >> 8)
 
-    def set_all_pwm(self, on, off):
+    def set_channel_off(self, channel):
+        """Disable PWM on channel. Channel output set to OFF"""
+        print('Attempting to set Channel output off')
+        self._device.write8(LED0_ON_L+4*channel, 0x0000 & 0xFF)
+        self._device.write8(LED0_ON_H+4*channel, 0x0000 >> 8)
+        self._device.write8(LED0_OFF_L+4*channel, 0x1000 & 0xFF)
+        self._device.write8(LED0_OFF_H+4*channel, 0x1000 >> 8)
+
+    def set_channel_on(self, channel):
+        """Disable PWM on channel. Channel output set to OFF"""
+        print('Attempting to set Channel output off')
+        self._device.write8(LED0_ON_L+4*channel, 0x1000 & 0xFF)
+        self._device.write8(LED0_ON_H+4*channel, 0x1000 >> 8)
+        self._device.write8(LED0_OFF_L+4*channel, 0x0000 & 0xFF)
+        self._device.write8(LED0_OFF_H+4*channel, 0x0000 >> 8)
+
+    def set_all_pwm(self, on_count, off_count):
         """Sets all PWM channels."""
-        self._device.write8(LED0_ON_L, on & 0xFF)
-        self._device.write8(LED0_ON_H, on >> 8)
+        self._device.write8(LED0_ON_L, on_count & 0xFF)
+        self._device.write8(LED0_ON_H, on_count >> 8)
 
-        self._device.write8(LED0_OFF_L, on & 0xFF)
-        self._device.write8(LED0_OFF_H,off >> 8)
+        self._device.write8(LED0_OFF_L, on_count & 0xFF)
+        self._device.write8(LED0_OFF_H, off_count >> 8)
+
+    def set_all_pwm_off(self):
+        print('Attempting to set all channel off')
+        self._device.write8(ALL_LED_OFF_L, 0x00)
+        self._device.write8(ALL_LED_OFF_H, 0x10)            
 
     # Helper function to make setting a servo pulse width simpler.
     def set_servo_pulse(self, channel, pulse):
