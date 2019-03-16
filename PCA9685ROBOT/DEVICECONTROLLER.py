@@ -5,8 +5,6 @@ import motor
 
 class DEVICECONTROLLER:
 
-    _servo_controller
-    
     @property
     def servo_controller(self, value):
         self._servo_controller = value
