@@ -82,7 +82,6 @@ class PCA9685ROBOT(object):
         print('attempting to set single pwm channel')
         self._device.write8(LED0_ON_L+4*channel, on & 0xFF)
         self._device.write8(LED0_ON_H+4*channel, on >> 8)
-
         self._device.write8(LED0_OFF_L+4*channel, on & 0xFF)
         self._device.write8(LED0_OFF_H+4*channel,off >> 8)
 

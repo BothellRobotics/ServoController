@@ -1,7 +1,6 @@
 from __future__ import division
 import time
 from PCA9685ROBOT import PCA9685ROBOT
-import motor
 
 class DEVICECONTROLLER:
 
