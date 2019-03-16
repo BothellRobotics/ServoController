@@ -43,7 +43,7 @@ class DEVICECONTROLLER:
             speed = dc_motor.minimum_speed
         
         if(dc_motor.minimum_speed == dc_motor.maximum_speed):
-            counts = _servo_controller.
+            counts = 0
 
 
 
