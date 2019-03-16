@@ -14,8 +14,11 @@ PRESCALE         = 0xFE
 LED0_ON_L        = 0x06
 LED0_ON_H        = 0x07
 LED0_OFF_L       = 0x08
-LED0_OFF_H       = 0x08
+LED0_OFF_H       = 0x09
 ALL_LED_ON_L     = 0xFA
+ALL_LED_ON_H     = 0xFB
+ALL_LED_OFF_L    = 0xFC
+ALL_LED_OFF_H    = 0xFD
 
 # Bits
 RESTART          = 0x80
@@ -35,7 +38,7 @@ def software_reset(i2c=None, **kwargs):
     self._device = i2c.get_i2c_device(0x00, **kwargs)
     self._device.writeRaw8(0x06)
 
-class pca9685_robot(object):
+class PCA9685ROBOT(object):
     """PCA9685 PWM LED/servo controller."""
 
     def __init__(self, address=PCA9685_ADDRESS, i2c=None, **kwargs):

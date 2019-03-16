@@ -5,7 +5,7 @@ if sys.version_info < (3.4):
 
 import time
 
-class motor:
+class MOTOR:
 
     def __init__(self, forward_channel, reverse_channel, pwm_channel, minimum_speed = 0, maximum_speed = 100):
         self._forward_channel = forward_channel
@@ -17,55 +17,60 @@ class motor:
 
     _forward_channel
 
+    #forward_channel - set
     @property
     def forward_channel(self, value):
         self._forward_channel = int(value)
     
+    #forward_channel - get
     @property
     def forward_channel(self):
         return self._forward_channel
 
     _reverse_channel
 
+    #reverse_channel - set
     @property
     def reverse_channel(self, value):
         self._reverse_channel = int(value)
     
-    @property_servo_controller = Adafruit_PCA9685.PCA9685()
-    _forward_right_motor = motor()
-    _forward_left_motor = motor()
-    _backward_right_motor = motor()    
-    _backward_left_motor = motor()
+    #reverse_channel - get
     def reverse_channel(self):
         return self._reverse_channel
 
 
     _pwm_channel
 
+    #pwm_channel - set
     @property
     def pwm_channel(self, value):
         self._pwm_channel = int(value)
     
+    #pwm_channel - get
     @property
     def pwm_channel(self):
         return self._pwm_channel
 
     _minimum_speed
 
+    # minimum_speed set
     @property
     def minimum_speed(self, value):
         self._minimum_speed = float(value)
     
+    # minimum_speed get
     @property
     def minimum_speed(self):
         return self._minimum_speed
 
     _maximum_speed
 
+    # maximum_speed set
     @property
     def maximum_speed(self, value):
         self._maximum_speed = float(value)
     
+    # maximum_speed get
     @property
     def maximum_speed(self):
         return self._maximum_speed
