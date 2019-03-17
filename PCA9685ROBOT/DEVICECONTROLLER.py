@@ -47,7 +47,29 @@ class DEVICECONTROLLER:
         self._backward_left_motor = backward_left_motor
         self._periodic_timer_milliseconds
 
+    def start_rover(self):
+        self._backward_left_motor.start_command = True
+        self._backward_right_motor.start_command = True
+        self._forward_right_motor.start_command = True
+        self._forward_left_motor.start_command = True
+
+    def stop_rover(self):
+        self._backward_left_motor.stop_command = True
+        self._backward_right_motor.stop_command = True
+        self._forward_right_motor.stop_command = True
+        self._forward_left_motor.stop_command = True
     
+    def reverse_rover(self):
+        self._backward_left_motor.reverse_command = True
+        self._backward_right_motor.reverse_command = True
+        self._forward_right_motor.reverse_command = True
+        self._forward_left_motor.reverse_command = True
+    
+    def forward_rover(self):
+        self._backward_left_motor.reverse_command = False
+        self._backward_right_motor.reverse_command = False
+        self._forward_right_motor.reverse_command = False
+        self._forward_left_motor.reverse_command = False
 
     def control_motor(self, dc_motor):
         counts = 0
@@ -89,7 +111,7 @@ class DEVICECONTROLLER:
             _servo_controller.set_channel_off(dc_motor.forward_channel)
             _servo_controller.set_channel_off(dc_motor.pwm_channel)
             dc_motor.count_last_scan = counts
-            dc_motor.running_sts = False
+            dc_motor.running_sts =_backward_right_motor False
             dc_motor.stop_command = False
 
         # Speed

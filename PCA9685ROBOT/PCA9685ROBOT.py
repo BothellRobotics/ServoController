@@ -52,7 +52,7 @@ class PCA9685ROBOT(object):
         self._frequency
         self._ready
         self._address
-
+        # Setup I2C interface for the device
         if i2c is None:
             import Adafruit_GPIO.I2C as I2C
             i2c = I2C
@@ -61,11 +61,11 @@ class PCA9685ROBOT(object):
         self.set_all_pwm(0,0)
         self._device.write8(MODE2, OUTDRV)
         self._device.write8(MODE1, ALLCALL)
-        time.sleep(0.005)
+        time.sleep(0.005)   # wait for oscillator
         mode1 = self._device.readU8(MODE1)
-        mode1 = mode1 & ~SLEEP
+        mode1 = mode1 & ~SLEEP  # wake up (reset sleep)
         self._device.write8(MODE1, mode1)
-        time.sleep(0.005)
+        time.sleep(0.005)   # wait for oscillator
 
     @property
     def ready(self):

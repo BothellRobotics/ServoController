@@ -30,14 +30,42 @@ pwm.set_pwm_freq(60)
 
 print('Moving servo on channel 0, press Ctrl-C to quit...')
 try:
-    while True:
-       # Move servo on channel O between extremes.
-       pwm.set_pwm(0, 0, servo_min)
-       time.sleep(2)
-       pwm.set_pwm(0,0, servo_med)
-       time.sleep(2)
-       pwm.set_pwm(0, 0, servo_max)
-       time.sleep(5)
+    while True:        
+        # Move servo on channel O between extremes.
+        fwd_rht = MOTOR(4, 5, 6)
+        fwd_lft = MOTOR(9, 8, 7)
+        bwd_rht = NOTOR(10, 11, 12)
+        bwd_lft = MOTOR(15, 14, 13)
+
+        devicecontroller = DEVICECONTROLLER(fwd_rht, fwd_lft, bwd_rht, bwd_lft)
+       
+        # Move Rover Forward
+        devicecontroller.start_rover()
+        time.sleep(2)
+        devicecontroller.forward_rover()
+        time.sleep(2)
+        devicecontroller.stop_rover()
+        time.sleep(2)
+
+        # Move Rover Backward
+        devicecontroller.start_rover()
+        time.sleep(2)
+        devicecontroller.reverse_rover()
+        time.sleep(2)
+        devicecontroller.stop_rover()
+        time.sleep(2)
+
+        # Increase Rover Speed
+
+
+        # Decrease Rover Speed
+
+        pwm.set_pwm(0, 0, servo_min)
+        time.sleep(2)
+        pwm.set_pwm(0,0, servo_med)
+        time.sleep(2)
+        pwm.set_pwm(0, 0, servo_max)
+        time.sleep(5)
 
 except KeyboardInterrupt:
     print('Attempt Program interrupt')
