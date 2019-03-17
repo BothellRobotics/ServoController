@@ -71,6 +71,19 @@ class DEVICECONTROLLER:
         self._forward_right_motor.reverse_command = False
         self._forward_left_motor.reverse_command = False
 
+    def set_controller_frequency(self, frequency):
+        self._servo_controller.frequency = frequency
+
+    def set_rover_speed(self, speed_value):
+        self._backward_left_motor.speed_command = speed_value
+        self._backward_right_motor.speed_command = speed_value
+        self._forward_right_motor.speed_command = speed_value
+        self._forward_left_motor.speed_command = speed_value
+        self.control_motor(self._backward_left_motor)
+        self.control_motor(self._backward_right_motor)
+        self.control_motor(self._forward_right_motor)
+        self.control_motor(self._forward_left_motor)
+
     def control_motor(self, dc_motor):
         counts = 0
         speed = dc_motor.speed_command

@@ -107,6 +107,8 @@ class PCA9685ROBOT(object):
             self._frequency = _maximum_frequency
         else:            
             self._frequency = value
+        
+        self.set_pwm_freq(self._frequency)
 
     @property
     def frequency(self):

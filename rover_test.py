@@ -40,6 +40,9 @@ try:
         devicecontroller = DEVICECONTROLLER(fwd_rht, fwd_lft, bwd_rht, bwd_lft)
        
         # Move Rover Forward
+        devicecontroller.stop_rover()
+        time.sleep(2)
+
         devicecontroller.start_rover()
         time.sleep(2)
         devicecontroller.forward_rover()
@@ -55,17 +58,36 @@ try:
         devicecontroller.stop_rover()
         time.sleep(2)
 
+        # Move  Rover Speed
+        devicecontroller.start_rover()
+        time.sleep(2)
+        devicecontroller.forward_rover()
+        time.sleep(2)
+        
         # Increase Rover Speed
-
+        devicecontroller.set_rover_speed(60.5)        
+        time.sleep(2)
+        # Increase Rover Speed again
+        devicecontroller.set_rover_speed(90.5)        
+        time.sleep(2)
 
         # Decrease Rover Speed
+        devicecontroller.set_rover_speed(50.5)        
+        time.sleep(2)
+        # Decrease Rover Speed again
+        devicecontroller.set_rover_speed(10.5)        
+        time.sleep(2)
 
-        pwm.set_pwm(0, 0, servo_min)
+        # Stop Rover
+        devicecontroller.stop_rover()
         time.sleep(2)
-        pwm.set_pwm(0,0, servo_med)
-        time.sleep(2)
-        pwm.set_pwm(0, 0, servo_max)
-        time.sleep(5)
+
+        #pwm.set_pwm(0, 0, servo_min)
+        #time.sleep(2)
+        #pwm.set_pwm(0,0, servo_med)
+        #time.sleep(2)
+        #pwm.set_pwm(0, 0, servo_max)
+        #time.sleep(5)
 
 except KeyboardInterrupt:
     print('Attempt Program interrupt')
