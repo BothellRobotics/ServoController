@@ -95,19 +95,22 @@ class PCA9685ROBOT(object):
     def frequency(self):
         return self._frequency
 
-    #def set_minimum_count(self, count):
-        #return self._minimum_count = int(count)
+    @property
+    def minimum_count(self, value):
+        self._minimum_count = int(value)
 
-    #def set_maximum_count(self, count):
-        #return self._maximum_count = int(count)
+    @property
+    def maximum_count(self, value):
+        self._maximum_count = int(value)
     
-    def set_frequency(self, count):
-        if(count < minimum_frequency):
+    @property
+    def frequency(self, value):
+        if(value < minimum_frequency):
             self._frequency = _minimum_frequency
-        elif (count > maximum_frequency):
+        elif (value > maximum_frequency):
             self._frequency = _maximum_frequency
         else:
-            self._frequency = count
+            self._frequency = value
         
         self.set_pwm_freq(self._frequency)
 
