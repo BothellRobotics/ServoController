@@ -89,7 +89,7 @@ class PCA9685ROBOT(object):
 
     @property
     def minimum_count(self, value):
-        return self._minimum_count = value
+        return self._minimum_count = int(value)
 
     @property
     def maximum_count(self):

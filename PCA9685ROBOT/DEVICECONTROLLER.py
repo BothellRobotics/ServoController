@@ -99,8 +99,8 @@ class DEVICECONTROLLER:
             counts = _servo_controller.minimum_count
         else:
             counts = int((speed - dc_motor.minimum_speed) * \
-                (float(_servo_controller.maximum_count - _servo_controller.minimum_count) / (dc_motor.maximum_speed - dc_motor.minimum_speed)) \
-                    + (float) _servo_controller.minimum_count)
+                (float(_servo_controller.maximum_count - _servo_controller.minimum_count) / (dc_motor.maximum_speed - dc_motor.minimum_speed))  + \
+                (float) _servo_controller.minimum_count)
         
         # Sart
         if(dc_motor.start_command() and not dc_motor.running_sts):
