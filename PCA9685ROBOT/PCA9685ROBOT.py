@@ -41,14 +41,14 @@ def software_reset(i2c=None, **kwargs):
 class PCA9685ROBOT(object):
     """PCA9685 PWM LED/servo controller."""
 
-    def __init__(self, address=PCA9685_ADDRESS, i2c=None, **kwargs):
+    def __init__(self, address=PCA9685_ADDRESS, i2c=None, minimum_count = 0, maximum_count = 4095, minimum_frequency = 0, maximum_frequency = 1000, **kwargs):
         """Initialize the PCA9685"""
         # Setup I2C interface for the device
         print('Initialize the PCA9685')
-        self._minimum_count = 0
-        self._maximum_count = 4095
-        self._minimum_frequency = 0
-        self._maximum_frequency = 1000
+        self._minimum_count  = minimum_count
+        self._maximum_count  = maximum_count
+        self._minimum_frequency = minimum_frequency
+        self._maximum_frequency = maximum_frequency
         self._frequency
         self._ready
         self._address
@@ -96,10 +96,10 @@ class PCA9685ROBOT(object):
         return self._frequency
 
     def set_minimum_count(self, count):
-        return self._minimum_count = count
+        return self._minimum_count = int(count)
 
     def set_maximum_count(self, count):
-        return self._maximum_count = count
+        return self._maximum_count = int(count)
     
     def set_frequency(self, count):
         if(count < minimum_frequency):
