@@ -49,9 +49,9 @@ class PCA9685ROBOT(object):
         self._maximum_count  = maximum_count
         self._minimum_frequency = minimum_frequency
         self._maximum_frequency = maximum_frequency
-        self._frequency
-        self._ready
-        self._address
+        self._frequency = 60
+        self._ready = False
+        self._address = address
         # Setup I2C interface for the device
         if i2c is None:
             import Adafruit_GPIO.I2C as I2C

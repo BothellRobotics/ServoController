@@ -5,9 +5,12 @@ import time
 class MOTOR:
 
     def __init__(self, forward_channel, reverse_channel, pwm_channel, \
-                    reverse_sts, direction_last_scan, speed_command, \
-                    count_last_scan, start_command, stop_command, \
-                    reverse_command, running_sts, forward_sts, \
+                    reverse_sts = False, direction_last_scan = False, \
+                    speed_command = float(20.5), \
+                    count_last_scan = int(0), start_command = True, \
+                    stop_command = False, \
+                    reverse_command = True, running_sts = False, \
+                    forward_sts = True, \
                     minimum_speed = 0, maximum_speed = 100):
         self._forward_channel = forward_channel
         self._reverse_channel = reverse_channel

@@ -7,8 +7,8 @@ import time
 
 # Import the PCA9685 module.
 from PCA9685ROBOT import PCA9685ROBOT
-import DEVICECONTROLLER
-import MOTOR
+from PCA9685ROBOT import DEVICECONTROLLER
+from PCA9685ROBOT import MOTOR
 
 # Uncomment to enable debug output.
 #import logging
@@ -34,7 +34,7 @@ try:
         # Move servo on channel O between extremes.
         fwd_rht = MOTOR(4, 5, 6)
         fwd_lft = MOTOR(9, 8, 7)
-        bwd_rht = NOTOR(10, 11, 12)
+        bwd_rht = MOTOR(10, 11, 12)
         bwd_lft = MOTOR(15, 14, 13)
 
         devicecontroller = DEVICECONTROLLER(fwd_rht, fwd_lft, bwd_rht, bwd_lft)
