@@ -53,95 +53,84 @@ class MOTOR:
     @property
     def pwm_channel(self):
         return self._pwm_channel
-
-    # minimum_speed set
-    @property
-    def minimum_speed(self, value):
-        self._minimum_speed = float(value)
     
     # minimum_speed get
     @property
     def minimum_speed(self):
         return self._minimum_speed
-
-    # maximum_speed set
-    @property
-    def maximum_speed(self, value):
-        self._maximum_speed = float(value)
     
     # maximum_speed get
     @property
     def maximum_speed(self):
-        return self._maximum_speed
-
-    @property
-    def speed_command(self, value):
-        self._speed_command = float(value)
+        return self._maximum_speed    
     
     @property
     def speed_command(self):
         return self._speed_command
 
     @property
-    def count_last_scan(self, value):
-        self._count_last_scan = int(value)
-    
-    @property
     def count_last_scan(self):
         return self._count_last_scan
-
-    @property
-    def start_command(self, value):
-        self._start_command = bool(value)
     
     @property
     def start_command(self):
-        return self._start_command
-    
-    @property
-    def stop_command(self, value):
-        self._stop_command = bool(value)
-    
-    @property
-    def stop_command(self):
-        return self._stop_command
+        return self._start_command    
 
-    @property
-    def reverse_command(self, value):
-        self._reverse_command = bool(value)
-    
-    @property
-    def reverse_command(self):
-        return self._reverse_command
-    
-    @property
-    def running_sts(self, value):
-        self._running_sts = bool(value)
-    
     @property
     def running_sts(self):
         return self._running_sts
 
     @property
-    def forward_sts(self, value):
-        self._forward_sts = bool(value)
-    
+    def stop_command(self):
+        return self._stop_command
+        
+    @property
+    def reverse_command(self):
+        return self._reverse_command
+        
     @property
     def forward_sts(self):
         return self._forward_sts
 
     @property
-    def reverse_sts(self, value):
-        self._reverse_sts = bool(value)
-    
-    @property
     def reverse_sts(self):
-        return self._reverse_sts
-
-    @property
-    def direction_last_scan(self, value):
-        self._direction_last_scan = bool(value)
+        return self._reverse_sts    
     
     @property
     def direction_last_scan(self):
         return self._direction_last_scan
+
+    # minimum_speed set    
+    def minimum_speed(self, value):
+        self._minimum_speed = float(value)
+    
+    # maximum_speed set
+    def maximum_speed(self, value):
+        self._maximum_speed = float(value)
+    
+    def speed_command(self, value):
+        self._speed_command = float(value)
+    
+    def count_last_scan(self, value):
+        self._count_last_scan = int(value)
+
+    def start_command(self, value):
+        self._start_command = bool(value)
+            
+    def stop_command(self, value):
+        self._stop_command = bool(value)    
+
+    def reverse_command(self, value):
+        self._reverse_command = bool(value)
+        
+    def running_sts(self, value):
+        self._running_sts = bool(value)
+        
+    def forward_sts(self, value):
+        self._forward_sts = bool(value)
+    
+    def direction_last_scan(self, value):
+        self._direction_last_scan = bool(value)
+
+    def reverse_sts(self, value):
+        self._reverse_sts = bool(value)
