@@ -46,53 +46,7 @@ class DEVICECONTROLLER:
         self._backward_right_motor = backward_right_motor
         self._backward_left_motor = backward_left_motor
         self._periodic_timer_milliseconds = 100
-
-    def start_rover(self):
-        self._backward_left_motor.start_command = True
-        self._backward_right_motor.start_command = True
-        self._forward_right_motor.start_command = True
-        self._forward_left_motor.start_command = True
-        self.control_rover()
-
-    def stop_rover(self):
-        self._backward_left_motor.stop_command = True
-        self._backward_right_motor.stop_command = True
-        self._forward_right_motor.stop_command = True
-        self._forward_left_motor.stop_command = True
-        self.control_rover()
-    
-    def reverse_rover(self):
-        self._backward_left_motor.reverse_command = True
-        self._backward_right_motor.reverse_command = True
-        self._forward_right_motor.reverse_command = True
-        self._forward_left_motor.reverse_command = True
-        self.control_rover()
-    
-    def forward_rover(self):
-        self._backward_left_motor.reverse_command = False
-        self._backward_right_motor.reverse_command = False
-        self._forward_right_motor.reverse_command = False
-        self._forward_left_motor.reverse_command = False
-        self.control_rover()
-
-    def set_controller_frequency(self, frequency):
-        self._servo_controller.frequency = frequency
-
-
-    def set_rover_speed(self, speed_value):
-        self._backward_left_motor.speed_command = speed_value
-        self._backward_right_motor.speed_command = speed_value
-        self._forward_right_motor.speed_command = speed_value
-        self._forward_left_motor.speed_command = speed_value
-
-
-    def control_rover(self)
-        self.control_motor(self._backward_left_motor)
-        self.control_motor(self._backward_right_motor)
-        self.control_motor(self._forward_right_motor)
-        self.control_motor(self._forward_left_motor)
-
-
+        
     def control_motor(self, dc_motor):
         counts = 0
         speed = dc_motor.speed_command
@@ -158,6 +112,49 @@ class DEVICECONTROLLER:
 
         dc_motor.start_command = False
         dc_motor.stop_command = False
+
+    def control_rover(self):
+        self.control_motor(self._backward_left_motor)
+        self.control_motor(self._backward_right_motor)
+        self.control_motor(self._forward_right_motor)
+        self.control_motor(self._forward_left_motor)
+                
+    def start_rover(self):
+        self._backward_left_motor.start_command = True
+        self._backward_right_motor.start_command = True
+        self._forward_right_motor.start_command = True
+        self._forward_left_motor.start_command = True
+        self.control_rover()
+
+    def stop_rover(self):
+        self._backward_left_motor.stop_command = True
+        self._backward_right_motor.stop_command = True
+        self._forward_right_motor.stop_command = True
+        self._forward_left_motor.stop_command = True
+        self.control_rover()    
+
+    def reverse_rover(self):
+        self._backward_left_motor.reverse_command = True
+        self._backward_right_motor.reverse_command = True
+        self._forward_right_motor.reverse_command = True
+        self._forward_left_motor.reverse_command = True
+        self.control_rover()
+    
+    def forward_rover(self):
+        self._backward_left_motor.reverse_command = False
+        self._backward_right_motor.reverse_command = False
+        self._forward_right_motor.reverse_command = False
+        self._forward_left_motor.reverse_command = False
+        self.control_rover()
+
+    def set_controller_frequency(self, frequency):
+        self._servo_controller.frequency = frequency
+
+    def set_rover_speed(self, speed_value):
+        self._backward_left_motor.speed_command = speed_value
+        self._backward_right_motor.speed_command = speed_value
+        self._forward_right_motor.speed_command = speed_value
+        self._forward_left_motor.speed_command = speed_value
 
             
 
