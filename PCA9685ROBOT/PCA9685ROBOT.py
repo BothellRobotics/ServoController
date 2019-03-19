@@ -96,7 +96,7 @@ class PCA9685ROBOT(object):
         return self._frequency
 
     def minimum_count(self, value):
-        return self._minimum_count = int(value)
+        return self._minimum_count = value
 
     def maximum_count(self, value):
         return self._maximum_count = value

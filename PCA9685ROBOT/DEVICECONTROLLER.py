@@ -124,7 +124,7 @@ class DEVICECONTROLLER:
             _servo_controller.set_channel_off(dc_motor.forward_channel)
             _servo_controller.set_channel_off(dc_motor.pwm_channel)
             dc_motor.count_last_scan = counts
-            dc_motor.running_sts =_backward_right_motor False
+            dc_motor.running_sts = False
             dc_motor.stop_command = False
 
         # Speed
