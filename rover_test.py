@@ -91,5 +91,5 @@ try:
 
 except KeyboardInterrupt:
     print('Attempt Program interrupt')
-    pwm.set_pwm(0, 0, 0)
+    devicecontroller.stop_rover()
     print('Program interrupted')
