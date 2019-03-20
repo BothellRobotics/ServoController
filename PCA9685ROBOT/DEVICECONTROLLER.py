@@ -97,10 +97,11 @@ class DEVICECONTROLLER:
                 dc_motor.reverse_sts = False                
                 _servo_controller.set_channel_on(dc_motor.forward_channel)
                 dc_motor.forward_sts = True
+        
             dc_motor.direction_last_scan = dc_motor.reverse_command
             _servo_controller.set_pwm(dc_motor.pwm_channel, _servo_controller.minimum_count, counts)
             dc_motor.count_last_scan = counts
-            dc_motor.running_sts = true
+            dc_motor.running_sts = True
         # Stop
         if(dc_motor.stop_command() and dc_motor.running_sts()):
             _servo_controller.set_channel_off(dc_motor.reverse_channel)
