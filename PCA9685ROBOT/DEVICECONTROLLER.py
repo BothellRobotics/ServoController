@@ -4,17 +4,18 @@ from PCA9685ROBOT import PCA9685ROBOT
 
 class DEVICECONTROLLER:
 
+    def __init__(self, forward_right_motor, forward_left_motor, backward_right_motor, backward_left_motor):
+        print('Initialize device controller')
+        self._servo_controller = PCA9685ROBOT()
+        self.forward_right_motor = forward_right_motor
+        self._forward_left_motor = forward_left_motor
+        self._backward_right_motor = backward_right_motor
+        self._backward_left_motor = backward_left_motor
+        self._periodic_timer_milliseconds = 100
+    
     @property
     def servo_controller(self):
         return self._servo_controller
-
-    @servo_controller.setter
-    def servo_controller(self, value):
-        self._servo_controller = value
-
-    @forward_right_motor.setter
-    def forward_right_motor(self, value):
-        self._forward_right_motor = value
     
     @property
     def forward_right_motor(self):
@@ -24,26 +25,38 @@ class DEVICECONTROLLER:
     def forward_left_motor(self):        
         return self._forward_left_motor
 
-    @forward_left_motor.setter
-    def forward_left_motor(self, value):        
-        self._forward_left_motor = value
-
     @property
     def backward_right_motor(self):
         return self._backward_right_motor
-
-    @backward_right_motor.setter
-    def backward_right_motor(self, value):
-        self._backward_right_motor = value
-
+    
     @property
     def backward_left_motor(self):
         return self._backward_left_motor
     
+    @forward_left_motor.setter
+    def forward_left_motor(self, value):        
+        self._forward_left_motor = value
+
+    @servo_controller.setter
+    def servo_controller(self, value):
+        self._servo_controller = value
+
+    @forward_right_motor.setter
+    def forward_right_motor(self, value):
+        self.forward_right_motor = value
+    
+    @backward_right_motor.setter
+    def backward_right_motor(self, value):
+        self._backward_right_motor = value
+
     @backward_left_motor.setter
     def backward_left_motor(self, value):
         self._backward_left_motor = value
 
+    @property
+    def update_rate(self):
+        return _periodic_timer_milliseconds
+    
     @update_rate.setter
     def update_rate(self, value):
         if(value < 1000):
@@ -53,20 +66,7 @@ class DEVICECONTROLLER:
         else:
             _periodic_timer_milliseconds = value
                     
-    @property
-    def update_rate(self):
-        return _periodic_timer_milliseconds
-
-
-    def __init__(self, forward_right_motor, forward_left_motor, backward_right_motor, backward_left_motor):
-        print('Initialize device controller')
-        self._servo_controller = PCA9685ROBOT()
-        self._forward_right_motor = forward_right_motor
-        self._forward_left_motor = forward_left_motor
-        self._backward_right_motor = backward_right_motor
-        self._backward_left_motor = backward_left_motor
-        self._periodic_timer_milliseconds = 100
-        
+    
     def control_motor(self, dc_motor):
         counts = 0
         speed = dc_motor.speed_command

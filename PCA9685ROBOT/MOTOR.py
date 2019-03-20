@@ -33,6 +33,7 @@ class MOTOR:
         return self._forward_channel
     
     #reverse_channel - get
+    @property
     def reverse_channel(self):
         return self._reverse_channel
     
