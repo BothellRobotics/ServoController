@@ -79,54 +79,54 @@ class DEVICECONTROLLER:
         
         # Scale the speed reference to PCA9685 device 'count'
         if(dc_motor.minimum_speed == dc_motor.maximum_speed):
-            counts = servo_controller.minimum_count
+            counts = self.servo_controller.minimum_count
         else:
             counts = int((speed - dc_motor.minimum_speed) * 
-            float((servo_controller.maximum_count - servo_controller.minimum_count) / (dc_motor.maximum_speed - dc_motor.minimum_speed))  + 
-            float(servo_controller.minimum_count))
+            float((self.servo_controller.maximum_count - self.servo_controller.minimum_count) / (dc_motor.maximum_speed - dc_motor.minimum_speed))  + 
+            float(self.servo_controller.minimum_count))
         
         # Sart
         if(dc_motor.start_command and not dc_motor.running_sts):
             if(dc_motor.reverse_command):
-                servo_controller.set_channel_off(dc_motor.forward_channel)
+                self.servo_controller.set_channel_off(dc_motor.forward_channel)
                 dc_motor.forward_sts = False
-                servo_controller.set_channel_on(dc_motor.reverse_channel)
+                self.servo_controller.set_channel_on(dc_motor.reverse_channel)
                 dc_motor.reverse_sts = True
             else:
-                servo_controller.set_channel_off(dc_motor.reverse_channel)
+                self.servo_controller.set_channel_off(dc_motor.reverse_channel)
                 dc_motor.reverse_sts = False                
-                servo_controller.set_channel_on(dc_motor.forward_channel)
+                self.servo_controller.set_channel_on(dc_motor.forward_channel)
                 dc_motor.forward_sts = True
         
             dc_motor.direction_last_scan = dc_motor.reverse_command
-            servo_controller.set_pwm(dc_motor.pwm_channel, servo_controller.minimum_count, counts)
+            self.servo_controller.set_pwm(dc_motor.pwm_channel, self.servo_controller.minimum_count, counts)
             dc_motor.count_last_scan = counts
             dc_motor.running_sts = True
         # Stop
         if(dc_motor.stop_command() and dc_motor.running_sts()):
-            servo_controller.set_channel_off(dc_motor.reverse_channel)
-            servo_controller.set_channel_off(dc_motor.forward_channel)
-            servo_controller.set_channel_off(dc_motor.pwm_channel)
+            self.servo_controller.set_channel_off(dc_motor.reverse_channel)
+            self.servo_controller.set_channel_off(dc_motor.forward_channel)
+            self.servo_controller.set_channel_off(dc_motor.pwm_channel)
             dc_motor.count_last_scan = counts
             dc_motor.running_sts = False
             dc_motor.stop_command = False
 
         # Speed
         if(counts != dc_motor.count_last_scan and dc_motor.running_sts):
-            servo_controller.set_pwm(dc_motor.pwm_channel, dc_motor.minimum_count, counts)
+            self.servo_controller.set_pwm(dc_motor.pwm_channel, dc_motor.minimum_count, counts)
             dc_motor.count_last_scan = counts
 
         # Direction
         if(dc_motor.running_sts and (dc_motor.reverse_command != dc_motor.direction_last_scan)):
             if(dc_motor.reverse_command):
-                servo_controller.set_channel_off(dc_motor.forward_channel)
+                self.servo_controller.set_channel_off(dc_motor.forward_channel)
                 dc_motor.forward_sts = False
-                servo_controller.set_channel_on(dc_motor.reverse_channel)
+                self.servo_controller.set_channel_on(dc_motor.reverse_channel)
                 dc_motor.reverse_sts = True
             else:
-                servo_controller.set_channel_off(dc_motor.reverse_channel)
+                self.servo_controller.set_channel_off(dc_motor.reverse_channel)
                 dc_motor.reverse_sts = False
-                servo_controller.set_channel_on(dc_motor.forward_channel)
+                self.servo_controller.set_channel_on(dc_motor.forward_channel)
                 dc_motor.forward_sts = True
 
             dc_motor.direction_last_scan = dc_motor.reverse_command
