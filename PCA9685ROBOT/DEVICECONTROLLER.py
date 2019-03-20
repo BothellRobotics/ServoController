@@ -6,25 +6,45 @@ class DEVICECONTROLLER:
 
     @property
     def servo_controller(self):
+        return self._servo_controller
+
+    @servo_controller.setter
+    def servo_controller(self, value):
         self._servo_controller = value
 
-    @property
+    @forward_right_motor.setter
     def forward_right_motor(self, value):
         self._forward_right_motor = value
     
     @property
+    def forward_right_motor(self):
+        return self._forward_right_motor
+
+    @property
+    def forward_left_motor(self):        
+        return self._forward_left_motor
+
+    @forward_left_motor.setter
     def forward_left_motor(self, value):        
         self._forward_left_motor = value
 
     @property
+    def backward_right_motor(self):
+        return self._backward_right_motor
+
+    @backward_right_motor.setter
     def backward_right_motor(self, value):
         self._backward_right_motor = value
 
     @property
+    def backward_left_motor(self):
+        return self._backward_left_motor
+    
+    @backward_left_motor.setter
     def backward_left_motor(self, value):
         self._backward_left_motor = value
-    
-    @property
+
+    @update_rate.setter
     def update_rate(self, value):
         if(value < 1000):
             _periodic_timer_milliseconds = 1000

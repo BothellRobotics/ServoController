@@ -28,29 +28,14 @@ class MOTOR:
         self._direction_last_scan = direction_last_scan
         print('Initialized Motor object')
 
-    #forward_channel - set
-    @property
-    def forward_channel(self, value):
-        self._forward_channel = int(value)
-    
     #forward_channel - get
     @property
     def forward_channel(self):
         return self._forward_channel
-
-    #reverse_channel - set
-    @property
-    def reverse_channel(self, value):
-        self._reverse_channel = int(value)
     
     #reverse_channel - get
     def reverse_channel(self):
         return self._reverse_channel
-
-    #pwm_channel - set
-    @property
-    def pwm_channel(self, value):
-        self._pwm_channel = int(value)
     
     #pwm_channel - get
     @property
@@ -104,36 +89,62 @@ class MOTOR:
         return self._direction_last_scan
 
     # minimum_speed set    
+    @minimum_speed.setter
     def minimum_speed(self, value):
         self._minimum_speed = float(value)
     
     # maximum_speed set
+    @maximum_speed.setter
     def maximum_speed(self, value):
         self._maximum_speed = float(value)
     
+    @speed_command.setter
     def speed_command(self, value):
         self._speed_command = float(value)
     
+    @count_last_scan.setter
     def count_last_scan(self, value):
         self._count_last_scan = int(value)
 
+    @start_command.setter
     def start_command(self, value):
         self._start_command = bool(value)
-            
+
+    @stop_command.setter    
     def stop_command(self, value):
         self._stop_command = bool(value)    
 
+    @reverse_command.setter
     def reverse_command(self, value):
         self._reverse_command = bool(value)
         
+    @running_sts.setter
     def running_sts(self, value):
         self._running_sts = bool(value)
         
+    @forward_sts.setter
     def forward_sts(self, value):
         self._forward_sts = bool(value)
     
+    @direction_last_scan.setter
     def direction_last_scan(self, value):
         self._direction_last_scan = bool(value)
 
+    @reverse_sts.setter
     def reverse_sts(self, value):
         self._reverse_sts = bool(value)
+
+    #forward_channel - set
+    @forward_channel.setter
+    def forward_channel(self, value):
+        self._forward_channel = int(value)
+    
+    #reverse_channel - set
+    @reverse_channel.setter
+    def reverse_channel(self, value):
+        self._reverse_channel = int(value)
+
+    #pwm_channel - set
+    @pwm_channel.setter
+    def pwm_channel(self, value):
+        self._pwm_channel = int(value)
