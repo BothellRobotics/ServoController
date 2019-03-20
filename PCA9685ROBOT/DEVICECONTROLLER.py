@@ -103,7 +103,7 @@ class DEVICECONTROLLER:
             dc_motor.count_last_scan = counts
             dc_motor.running_sts = True
         # Stop
-        if(dc_motor.stop_command and dc_motor.running_sts:
+        if(dc_motor.stop_command and dc_motor.running_sts):
             self.servo_controller.set_channel_off(dc_motor.reverse_channel)
             self.servo_controller.set_channel_off(dc_motor.forward_channel)
             self.servo_controller.set_channel_off(dc_motor.pwm_channel)
