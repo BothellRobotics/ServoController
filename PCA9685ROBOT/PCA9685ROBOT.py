@@ -95,15 +95,15 @@ class PCA9685ROBOT(object):
     def frequency(self):
         return self._frequency
 
-    @property
+    @minimum_count.setter
     def minimum_count(self, value):
         self._minimum_count = int(value)
 
-    @property
+    @maximum_count.setter
     def maximum_count(self, value):
         self._maximum_count = int(value)
     
-    @property
+    @frequency.setter
     def frequency(self, value):
         if(value < minimum_frequency):
             self._frequency = _minimum_frequency
