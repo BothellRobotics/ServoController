@@ -2,15 +2,15 @@ from __future__ import division
 import time
 from PCA9685ROBOT import PCA9685ROBOT
 
-class DEVICECONTROLLER:
+class ROVER:
 
-    def __init__(self, forward_right_motor, forward_left_motor, backward_right_motor, backward_left_motor):
+    def __init__(self):
         print('Initialize device controller')
         self._servo_controller = PCA9685ROBOT()
-        self._forward_right_motor = forward_right_motor
-        self._forward_left_motor = forward_left_motor
-        self._backward_right_motor = backward_right_motor
-        self._backward_left_motor = backward_left_motor
+        self._forward_right_motor = MOTOR(4, 5, 6)
+        self._forward_left_motor = MOTOR(9, 8, 7)
+        self._backward_right_motor = MOTOR(10, 11, 12)
+        self._backward_left_motor = MOTOR(15, 14, 13)
         self._periodic_timer_milliseconds = 100
     
     @property
@@ -88,11 +88,13 @@ class DEVICECONTROLLER:
         # Sart
         if(dc_motor.start_command and not dc_motor.running_sts):
             if(dc_motor.reverse_command):
+                print('reversing the rover')
                 self.servo_controller.set_channel_off(dc_motor.forward_channel)
                 dc_motor.forward_sts = False
                 self.servo_controller.set_channel_on(dc_motor.reverse_channel)
                 dc_motor.reverse_sts = True
             else:
+                print('rover moves forward')
                 self.servo_controller.set_channel_off(dc_motor.reverse_channel)
                 dc_motor.reverse_sts = False                
                 self.servo_controller.set_channel_on(dc_motor.forward_channel)
@@ -154,20 +156,33 @@ class DEVICECONTROLLER:
         self._forward_left_motor.stop_command = True
         self.control_rover()    
 
-    def reverse_rover(self):
+    def forward_rover(self):
         self._backward_left_motor.reverse_command = True
         self._backward_right_motor.reverse_command = True
         self._forward_right_motor.reverse_command = True
         self._forward_left_motor.reverse_command = True
         self.control_rover()
     
-    def forward_rover(self):
+    def reverse_rover(self):
         self._backward_left_motor.reverse_command = False
         self._backward_right_motor.reverse_command = False
         self._forward_right_motor.reverse_command = False
         self._forward_left_motor.reverse_command = False
         self.control_rover()
 
+    def left_rover(self):
+        self._backward_right_motor.reverse_command = True
+        self._forward_right_motor.reverse_command = True
+        self._backward_left_motor.reverse_command = False
+        self._forward_left_motor.reverse_command = False
+        self.control_rover()
+
+    def right_rover(self):
+        self._forward_left_motor.reverse_command = True
+        self._backward_left_motor.reverse_command = True
+        self._backward_right_motor.reverse_command = False
+        self._forward_right_motor.reverse_command = False
+        
     def set_controller_frequency(self, frequency):
         self.servo_controller.frequency = frequency
 

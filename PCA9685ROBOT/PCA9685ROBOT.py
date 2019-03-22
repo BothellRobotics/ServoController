@@ -150,7 +150,7 @@ class PCA9685ROBOT(object):
 
     def set_channel_on(self, channel):
         """Disable PWM on channel. Channel output set to OFF"""
-        print('Attempting to set Channel output off')
+        print('Attempting to set Channel output on')
         self._device.write8(LED0_ON_L+4*channel, 0x1000 & 0xFF)
         self._device.write8(LED0_ON_H+4*channel, 0x1000 >> 8)
         self._device.write8(LED0_OFF_L+4*channel, 0x0000 & 0xFF)

@@ -7,7 +7,7 @@ import time
 
 # Import the PCA9685 module.
 from PCA9685ROBOT import PCA9685ROBOT
-from PCA9685ROBOT import DEVICECONTROLLER
+from PCA9685ROBOT import ROVER
 from PCA9685ROBOT import MOTOR
 
 # Uncomment to enable debug output.
@@ -28,58 +28,58 @@ servo_max = 2000
 # Set frequency to 60hz, good for servos.
 pwm.set_pwm_freq(60)
 
+
+fwd_rht = MOTOR(4, 5, 6)
+fwd_lft = MOTOR(9, 8, 7)
+bwd_rht = MOTOR(10, 11, 12)
+bwd_lft = MOTOR(15, 14, 13)
+
+rover = ROVER()
+
 print('Moving servo on channel 0, press Ctrl-C to quit...')
 try:
     while True:        
-        # Move servo on channel O between extremes.
-        fwd_rht = MOTOR(4, 5, 6)
-        fwd_lft = MOTOR(9, 8, 7)
-        bwd_rht = MOTOR(10, 11, 12)
-        bwd_lft = MOTOR(15, 14, 13)
-
-        devicecontroller = DEVICECONTROLLER(fwd_rht, fwd_lft, bwd_rht, bwd_lft)
-       
         # Move Rover Forward
-        devicecontroller.stop_rover()
+        rover.stop_rover()
         time.sleep(2)
 
-        devicecontroller.start_rover()
+        rover.start_rover()
         time.sleep(2)
-        devicecontroller.forward_rover()
+        rover.forward_rover()
         time.sleep(2)
-        devicecontroller.stop_rover()
+        rover.stop_rover()
         time.sleep(2)
 
         # Move Rover Backward
-        devicecontroller.start_rover()
+        rover.start_rover()
         time.sleep(2)
-        devicecontroller.reverse_rover()
+        rover.reverse_rover()
         time.sleep(2)
-        devicecontroller.stop_rover()
+        rover.stop_rover()
         time.sleep(2)
 
         # Move  Rover Speed
-        devicecontroller.start_rover()
+        rover.start_rover()
         time.sleep(2)
-        devicecontroller.forward_rover()
+        rover.forward_rover()
         time.sleep(2)
         
         # Increase Rover Speed
-        devicecontroller.set_rover_speed(60.5)        
+        rover.set_rover_speed(60.5)        
         time.sleep(2)
         # Increase Rover Speed again
-        devicecontroller.set_rover_speed(90.5)        
+        rover.set_rover_speed(90.5)        
         time.sleep(2)
 
         # Decrease Rover Speed
-        devicecontroller.set_rover_speed(50.5)        
+        rover.set_rover_speed(50.5)        
         time.sleep(2)
         # Decrease Rover Speed again
-        devicecontroller.set_rover_speed(10.5)        
+        rover.set_rover_speed(10.5)        
         time.sleep(2)
 
         # Stop Rover
-        devicecontroller.stop_rover()
+        rover.stop_rover()
         time.sleep(2)
 
         #pwm.set_pwm(0, 0, servo_min)
@@ -91,5 +91,5 @@ try:
 
 except KeyboardInterrupt:
     print('Attempt Program interrupt')
-    devicecontroller.stop_rover()
+    rover.stop_rover()
     print('Program interrupted')
