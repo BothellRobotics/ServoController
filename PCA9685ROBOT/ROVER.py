@@ -1,16 +1,17 @@
 from __future__ import division
 import time
 from PCA9685ROBOT import PCA9685ROBOT
+from PCA9685ROBOT import MOTOR
 
 class ROVER:
 
-    def __init__(self):
+    def __init__(self, fr = MOTOR(6, 5, 4), br = MOTOR(7, 8, 9), bl = MOTOR(12, 11, 10), fl = MOTOR(13, 14, 15)):
         print('Initialize device controller')
         self._servo_controller = PCA9685ROBOT()
-        self._forward_right_motor = MOTOR(4, 5, 6)
-        self._forward_left_motor = MOTOR(9, 8, 7)
-        self._backward_right_motor = MOTOR(10, 11, 12)
-        self._backward_left_motor = MOTOR(15, 14, 13)
+        self._forward_right_motor = fr
+        self._forward_left_motor = fl
+        self._backward_right_motor = br
+        self._backward_left_motor = bl
         self._periodic_timer_milliseconds = 100
     
     @property
@@ -115,7 +116,7 @@ class ROVER:
 
         # Speed
         if(counts != dc_motor.count_last_scan and dc_motor.running_sts):
-            self.servo_controller.set_pwm(dc_motor.pwm_channel, dc_motor.minimum_count, counts)
+            self.servo_controller.set_pwm(dc_motor.pwm_channel, self.servo_controller.minimum_count, counts)
             dc_motor.count_last_scan = counts
 
         # Direction
@@ -182,15 +183,18 @@ class ROVER:
         self._backward_left_motor.reverse_command = True
         self._backward_right_motor.reverse_command = False
         self._forward_right_motor.reverse_command = False
-        
+        self.control_rover()
+
     def set_controller_frequency(self, frequency):
         self.servo_controller.frequency = frequency
+        self.control_rover()
 
     def set_rover_speed(self, speed_value):
         self._backward_left_motor.speed_command = speed_value
         self._backward_right_motor.speed_command = speed_value
         self._forward_right_motor.speed_command = speed_value
         self._forward_left_motor.speed_command = speed_value
+        self.control_rover()
 
             
 

@@ -1,3 +1,7 @@
+# Simple demo of of the PCA9685 PWM servo/LED controller library.
+# This will move channel 0 from min to max position repeatedly.
+# Author: Tony DiCola
+# License: Public Domain
 from __future__ import division
 import time
 
@@ -36,55 +40,10 @@ print('Moving servo on channel 0, press Ctrl-C to quit...')
 try:
     while True:        
         # Move Rover Forward
-        rover.stop_rover()
-        time.sleep(2)
-
-        rover.start_rover()
-        time.sleep(2)
-        rover.forward_rover()
-        time.sleep(2)
-        rover.stop_rover()
-        time.sleep(2)
-
-        # Move Rover Backward
-        rover.start_rover()
-        time.sleep(2)
         rover.reverse_rover()
-        time.sleep(2)
+        time.sleep(10)
         rover.stop_rover()
-        time.sleep(2)
-
-        # Move  Rover Speed
-        rover.start_rover()
-        time.sleep(2)
-        rover.forward_rover()
-        time.sleep(2)
         
-        # Increase Rover Speed
-        rover.set_rover_speed(60.5)        
-        time.sleep(2)
-        # Increase Rover Speed again
-        rover.set_rover_speed(90.5)        
-        time.sleep(2)
-
-        # Decrease Rover Speed
-        rover.set_rover_speed(50.5)        
-        time.sleep(2)
-        # Decrease Rover Speed again
-        rover.set_rover_speed(10.5)        
-        time.sleep(2)
-
-        # Stop Rover
-        rover.stop_rover()
-        time.sleep(2)
-
-        #pwm.set_pwm(0, 0, servo_min)
-        #time.sleep(2)
-        #pwm.set_pwm(0,0, servo_med)
-        #time.sleep(2)
-        #pwm.set_pwm(0, 0, servo_max)
-        #time.sleep(5)
-
 except KeyboardInterrupt:
     print('Attempt Program interrupt')
     rover.stop_rover()

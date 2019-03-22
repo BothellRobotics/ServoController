@@ -28,17 +28,16 @@ servo_max = 2000
 # Set frequency to 60hz, good for servos.
 pwm.set_pwm_freq(60)
 
-
-fwd_rht = MOTOR(4, 5, 6)
-fwd_lft = MOTOR(9, 8, 7)
-bwd_rht = MOTOR(10, 11, 12)
-bwd_lft = MOTOR(15, 14, 13)
+fwd_rht = MOTOR(6, 5, 4)
+bwd_rht = MOTOR(7, 8, 9)
+bwd_lft = MOTOR(12, 11, 10)
+fwd_lft = MOTOR(13, 14, 15)
 
 rover = ROVER()
 
 print('Moving servo on channel 0, press Ctrl-C to quit...')
 print('Press F: Forward')
-print('Press R: Reverse')
+print('Press B: Backward')
 print('Press L: Turn LEFT')
 print('Press R: Turn RIGHT')
 print('Press I: Increase Speed')
@@ -49,27 +48,33 @@ try:
     while True:        
         cmd = input()
         if(cmd == 'F' or cmd == 'f'):
-            rover.stop_rover()
+            #rover.stop_rover()
             rover.start_rover()
             time.sleep(1)
             rover.forward_rover()
-        elif(cmd == 'R' or cmd == 'r'):
-            rover.stop_rover()
-            time.sleep(1)
+            rover.set_rover_speed(40)
+            time.sleep(5)
+        elif(cmd == 'B' or cmd == 'b'):
+            #rover.stop_rover()                        
             rover.reverse_rover()
+            time.sleep(1)
+            rover.set_rover_speed(40)
+            time.sleep(10)
         elif(cmd == 'L' or cmd == 'l'):
-            rover.stop_rover()
-            time.sleep(1)
-            rover.left_rover()
+            #rover.stop_rover()            
+            rover.left_rover()            
+            time.sleep(5)
         elif(cmd == 'R' or cmd == 'r'):
-            rover.stop_rover()
-            time.sleep(1)
+            #rover.stop_rover()            
             rover.right_rover()
+            time.sleep(5)
         elif(cmd == 'I' or cmd == 'i'):
-            rover.set_rover_speed(98.5)
-        elif(cmd = 'D' or cmd == 'd'):
-            rover.set_rover_speed(50.5)
-        elif(cmd = 'S' or cmd == 's'):
+            rover.set_rover_speed(99.5)
+            time.sleep(5)
+        elif(cmd == 'D' or cmd == 'd'):
+            rover.set_rover_speed(30.5)
+            time.sleep(5)
+        elif(cmd == 'S' or cmd == 's'):
             rover.stop_rover()
 except KeyboardInterrupt:
     print('Attempt Program interrupt')
