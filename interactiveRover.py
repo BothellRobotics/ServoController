@@ -1,7 +1,6 @@
 from __future__ import division
 import time
 
-# Import the PCA9685 module.
 from PCA9685ROBOT import PCA9685ROBOT
 from PCA9685ROBOT import ROVER
 from PCA9685ROBOT import MOTOR
